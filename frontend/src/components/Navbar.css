@@ -1,0 +1,135 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  transition: padding 0.4s var(--ease), background 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+.nav--scrolled {
+  padding: 10px 0;
+  background: rgba(10, 14, 12, 0.72);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav__logo {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--green-700);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+}
+.nav__name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: #0c1712; /* dark text over light hero */
+}
+.nav__name strong {
+  color: #0a8f69;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.nav__links a {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: #46554f; /* dark text over light hero */
+  transition: color 0.25s var(--ease);
+}
+.nav__links a:hover {
+  color: #0a8f69;
+}
+
+/* Once scrolled, navbar sits on a dark blur — flip text to light */
+.nav--scrolled .nav__name {
+  color: #fff;
+}
+.nav--scrolled .nav__name strong {
+  color: var(--green-300);
+}
+.nav--scrolled .nav__links a {
+  color: rgba(255, 255, 255, 0.82);
+}
+.nav--scrolled .nav__links a:hover {
+  color: var(--green-300);
+}
+.nav--scrolled .nav__burger span {
+  background: #fff;
+}
+.nav__cta {
+  padding: 11px 20px !important;
+  font-size: 0.95rem !important;
+  color: #04140e !important;
+}
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+.nav__burger span {
+  width: 24px;
+  height: 2px;
+  background: #0c1712;
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.nav__burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav__burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav__burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+  .nav__burger {
+    display: flex;
+  }
+  .nav__links {
+    position: fixed;
+    inset: 0 0 0 30%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    background: var(--white);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.12);
+    transform: translateX(100%);
+    transition: transform 0.45s var(--ease);
+  }
+  .nav__links.is-open {
+    transform: translateX(0);
+  }
+  .nav__links a {
+    font-size: 1.2rem;
+    color: var(--ink); /* light text on dark slide-in panel */
+  }
+  .nav--scrolled .nav__links a {
+    color: var(--ink);
+  }
+}

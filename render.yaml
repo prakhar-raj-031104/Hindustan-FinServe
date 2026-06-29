@@ -1,0 +1,46 @@
+# Render Blueprint — Hindustan FinServe
+# Frontend (static site) + Backend (web service). Database is Neon (external).
+#
+# After the first deploy you must set two cross-referencing env vars in the
+# Render dashboard (see DEPLOY.md):
+#   - API service:      CORS_ORIGIN   = <frontend URL>
+#   - Frontend service: VITE_API_BASE_URL = <API URL>
+
+services:
+  # ── Backend API ─────────────────────────────────────────────
+  - type: web
+    name: hindustan-finserve-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    # Run migrations before each deploy goes live (idempotent — uses IF NOT EXISTS)
+    preDeployCommand: npm run db:migrate
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PG_POOL_MAX
+        value: "5"
+      - key: DATABASE_URL
+        sync: false # paste Neon POOLED connection string in the dashboard
+      - key: CORS_ORIGIN
+        sync: false # set to the frontend URL after first deploy
+
+  # ── Frontend (static site) ──────────────────────────────────
+  - type: web
+    name: hindustan-finserve-web
+    runtime: static
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    # SPA fallback
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false # set to the API URL after first deploy

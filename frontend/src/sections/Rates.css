@@ -1,0 +1,119 @@
+.rates {
+  background: var(--paper-2);
+}
+.rates__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.rates__chip {
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: all 0.3s var(--ease);
+}
+.rates__chip:hover {
+  color: var(--green-700);
+}
+.rates__chip.is-active {
+  background: var(--green-700);
+  color: #fff;
+  border-color: var(--green-700);
+}
+
+.rates__table {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.rates__head,
+.rates__row {
+  display: grid;
+  grid-template-columns: 1.6fr 0.8fr 0.8fr 1fr 0.9fr 0.9fr 0.9fr;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 26px;
+}
+.rates__head {
+  background: var(--paper);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rates__row {
+  border-top: 1px solid var(--line);
+  transition: background 0.25s var(--ease);
+}
+.rates__row:hover {
+  background: var(--paper);
+}
+.rates__row.is-featured {
+  background: linear-gradient(90deg, rgba(18, 184, 134, 0.08), transparent);
+}
+.rates__issuer {
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.rates__issuer em {
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green-700);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.rates__rate {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.rates__rate--senior {
+  color: var(--green-300);
+}
+.rates__invest {
+  font-weight: 700;
+  color: var(--green-700);
+}
+.rates__empty,
+.rates__error {
+  padding: 30px 26px;
+  color: var(--ink-soft);
+}
+.rates__error {
+  color: #c0392b;
+}
+
+@media (max-width: 860px) {
+  .rates__head {
+    display: none;
+  }
+  .rates__row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+    padding: 20px;
+  }
+  .rates__issuer {
+    grid-column: 1 / -1;
+    font-size: 1.1rem;
+  }
+  .rates__row span[data-label]::before {
+    content: attr(data-label) ': ';
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+}

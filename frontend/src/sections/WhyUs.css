@@ -1,0 +1,82 @@
+.why {
+  background: var(--paper);
+}
+.why__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 60px;
+  align-items: start;
+}
+.why__aside {
+  position: sticky;
+  top: 110px;
+}
+.why__aside h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 18px 0 18px;
+}
+.why__aside p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+
+.why__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.why__card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+  will-change: transform;
+}
+.why__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -35px rgba(5, 61, 44, 0.4);
+  border-color: transparent;
+}
+.why__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--paper-2);
+  font-size: 1.6rem;
+  margin-bottom: 22px;
+}
+.why__card h3 {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.why__card p {
+  color: var(--ink-soft);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 900px) {
+  .why__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .why__aside {
+    position: static;
+  }
+}
+@media (max-width: 520px) {
+  .why__cards {
+    grid-template-columns: 1fr;
+  }
+}
