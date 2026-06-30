@@ -1,38 +1,37 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import Navbar from './components/Navbar';
-import Hero from './sections/Hero';
-import Marquee from './sections/Marquee';
-import SideScroll from './sections/SideScroll';
-import Showcase from './sections/Showcase';
-import StackCards from './sections/StackCards';
-import WhyUs from './sections/WhyUs';
-import Rates from './sections/Rates';
-import Calculator from './sections/Calculator';
-import Process from './sections/Process';
-import Testimonials from './sections/Testimonials';
-import Contact from './sections/Contact';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import Home from './pages/Home';
+import Investments from './pages/Investments';
+import LegalPage from './pages/LegalPage';
+import { about, privacy, terms } from './content/pages';
 
-export default function App() {
+function Layout({ children }) {
   useSmoothScroll();
-
   return (
     <>
       <Navbar />
-      <main>
-        <Hero />
-        <Marquee />
-        <Showcase />
-        <SideScroll />
-        <StackCards />
-        <WhyUs />
-        <Rates />
-        <Calculator />
-        <Process />
-        <Testimonials />
-        <Contact />
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/investments" element={<Investments />} />
+          <Route path="/about" element={<LegalPage {...about} />} />
+          <Route path="/privacy-policy" element={<LegalPage {...privacy} />} />
+          <Route path="/terms-and-conditions" element={<LegalPage {...terms} />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }

@@ -34,6 +34,9 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
 
 CREATE INDEX IF NOT EXISTS idx_fd_featured ON fd_products(is_featured);
 CREATE INDEX IF NOT EXISTS idx_leads_created ON contact_leads(created_at DESC);
+
+ALTER TABLE contact_leads ADD COLUMN IF NOT EXISTS company TEXT;
+ALTER TABLE contact_leads ADD COLUMN IF NOT EXISTS location TEXT;
 `;
 
 async function migrate() {

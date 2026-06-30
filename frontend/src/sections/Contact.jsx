@@ -3,7 +3,7 @@ import { useReveal } from '../hooks/useReveal';
 import { submitContact } from '../lib/api';
 import './Contact.css';
 
-const initial = { name: '', email: '', phone: '', amount: '', message: '' };
+const initial = { name: '', email: '', phone: '', company: '', location: '', amount: '', message: '' };
 
 export default function Contact() {
   const ref = useReveal({ y: 36, stagger: 0.08 });
@@ -22,6 +22,8 @@ export default function Contact() {
         name: form.name,
         email: form.email,
         phone: form.phone,
+        company: form.company || undefined,
+        location: form.location || undefined,
         amount: form.amount ? Number(form.amount) : undefined,
         message: form.message || undefined,
       });
@@ -117,6 +119,26 @@ export default function Contact() {
                     value={form.phone}
                     onChange={update('phone')}
                     placeholder="+91 …"
+                  />
+                </div>
+              </div>
+              <div className="contact__row">
+                <div className="contact__field">
+                  <label>Company (optional)</label>
+                  <input
+                    type="text"
+                    value={form.company}
+                    onChange={update('company')}
+                    placeholder="Company name"
+                  />
+                </div>
+                <div className="contact__field">
+                  <label>Location (optional)</label>
+                  <input
+                    type="text"
+                    value={form.location}
+                    onChange={update('location')}
+                    placeholder="City / state"
                   />
                 </div>
               </div>

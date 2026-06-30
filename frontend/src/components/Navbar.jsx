@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const links = [
-  { href: '#products', label: 'Products' },
-  { href: '#rates', label: 'FD Rates' },
-  { href: '#calculator', label: 'Calculator' },
-  { href: '#why', label: 'Why Us' },
-  { href: '#contact', label: 'Contact' },
+  { to: '/investments', label: 'Investments' },
+  { hash: '/#rates', label: 'FD Rates' },
+  { hash: '/#calculator', label: 'Calculator' },
+  { to: '/about', label: 'About Us' },
+  { hash: '/#contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -23,20 +24,26 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="container nav__inner">
-        <a href="#top" className="nav__brand">
+        <Link to="/" className="nav__brand" onClick={() => setOpen(false)}>
           <span className="nav__logo">HF</span>
           <span className="nav__name">
             Hindustan<strong>FinServe</strong>
           </span>
-        </a>
+        </Link>
 
         <nav className={`nav__links ${open ? 'is-open' : ''}`}>
-          {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-          <a href="#contact" className="btn btn-primary nav__cta" onClick={() => setOpen(false)}>
+          {links.map((l) =>
+            l.to ? (
+              <Link key={l.label} to={l.to} onClick={() => setOpen(false)}>
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.label} href={l.hash} onClick={() => setOpen(false)}>
+                {l.label}
+              </a>
+            )
+          )}
+          <a href="/#contact" className="btn btn-primary nav__cta" onClick={() => setOpen(false)}>
             Start Investing
           </a>
         </nav>

@@ -1,6 +1,27 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { subscribe } from '../lib/api';
 import './Footer.css';
+
+const ROUTES = {
+  'About us': '/about',
+  'About Hindustan FinServe': '/about',
+  Contact: '/#contact',
+  'Contact Us': '/#contact',
+  'Privacy Policy': '/privacy-policy',
+  'Terms & Conditions': '/terms-and-conditions',
+  'NBFC fixed deposits': '/investments',
+  'Bank fixed deposits': '/investments',
+  'Housing finance FDs': '/investments',
+  'Senior citizen FDs': '/investments',
+  'FD calculator': '/#calculator',
+  'Rate comparison': '/#rates',
+};
+function FLink({ label }) {
+  const to = ROUTES[label];
+  if (to && to.startsWith('/') && !to.includes('#')) return <Link to={to}>{label}</Link>;
+  return <a href={to || '#top'}>{label}</a>;
+}
 
 const columns = [
   {
@@ -135,7 +156,7 @@ export default function Footer() {
                 <ul>
                   {c.links.map((l) => (
                     <li key={l}>
-                      <a href="#top">{l}</a>
+                      <FLink label={l} />
                     </li>
                   ))}
                 </ul>
@@ -176,9 +197,7 @@ export default function Footer() {
           <span className="footer__legal-label">Others:</span>
           <div className="footer__legal-links">
             {legal.map((l) => (
-              <a key={l} href="#top">
-                {l}
-              </a>
+              <FLink key={l} label={l} />
             ))}
           </div>
         </div>
