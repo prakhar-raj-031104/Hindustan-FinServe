@@ -38,6 +38,15 @@ services:
       - type: rewrite
         source: /*
         destination: /index.html
+    # Cache headers: never cache the HTML shell (so new deploys show instantly),
+    # cache the content-hashed assets forever (fast repeat loads).
+    headers:
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
     envVars:
       - key: VITE_API_BASE_URL
         sync: false # set to the API URL after first deploy
