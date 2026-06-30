@@ -84,15 +84,19 @@
   padding: 14px 16px;
   border-radius: 14px;
   border: 1.5px solid var(--line);
-  background: var(--paper);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--ink);
   transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.contact__field input::placeholder,
+.contact__field textarea::placeholder {
+  color: var(--ink-soft);
 }
 .contact__field input:focus,
 .contact__field textarea:focus {
   outline: none;
   border-color: var(--green-500);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.07);
 }
 .contact__field textarea {
   resize: vertical;

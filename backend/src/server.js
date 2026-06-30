@@ -31,11 +31,14 @@ app.use(compression());
 const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
   .split(',')
   .map((o) => o.trim());
+const isLocalhost = (o) => /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(o);
 app.use(
   cors({
     origin(origin, cb) {
       // allow same-origin / curl (no origin) and any whitelisted origin
       if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      // in development, accept any localhost port (5173, 5174, …)
+      if (!isProd && isLocalhost(origin)) return cb(null, true);
       return cb(new Error('Not allowed by CORS'));
     },
   })
