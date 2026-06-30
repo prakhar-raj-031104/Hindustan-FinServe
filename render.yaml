@@ -16,8 +16,6 @@ services:
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
-    # Run migrations before each deploy goes live (idempotent — uses IF NOT EXISTS)
-    preDeployCommand: npm run db:migrate
     envVars:
       - key: NODE_ENV
         value: production
