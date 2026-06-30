@@ -11,6 +11,16 @@ const { Pool } = pg;
  */
 const useConnectionString = Boolean(process.env.DATABASE_URL);
 
+// When a full DATABASE_URL is provided, it is authoritative — strip any stray
+// PG* vars (e.g. from a local .env) so they can't override the URL's host/port.
+if (useConnectionString) {
+  delete process.env.PGHOST;
+  delete process.env.PGPORT;
+  delete process.env.PGUSER;
+  delete process.env.PGPASSWORD;
+  delete process.env.PGDATABASE;
+}
+
 export const pool = new Pool(
   useConnectionString
     ? {
