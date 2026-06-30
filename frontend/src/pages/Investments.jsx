@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getFdProducts } from '../lib/api';
-import { useReveal } from '../hooks/useReveal';
 import './Investments.css';
 
 const TENURES = [12, 18, 24, 36, 48, 60];
 const inr = (n) => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(n);
 
 export default function Investments() {
-  const ref = useReveal({ y: 40, stagger: 0.08 });
   const [products, setProducts] = useState([]);
   const [gender, setGender] = useState('male');
   const [senior, setSenior] = useState(false);
@@ -33,9 +31,9 @@ export default function Investments() {
   }, [products, tenure, senior, amount]);
 
   return (
-    <section className="inv section theme-light" ref={ref}>
+    <section className="inv section theme-light">
       <div className="container">
-        <div className="section-head" data-reveal>
+        <div className="section-head">
           <span className="eyebrow">Investments</span>
           <h2>Compare Fixed Deposit interest rates</h2>
           <p>Customise your profile and instantly compare projected returns across our partner issuers.</p>
@@ -43,7 +41,7 @@ export default function Investments() {
 
         <div className="inv__grid">
           {/* Form */}
-          <form className="inv__form" data-reveal onSubmit={(e) => e.preventDefault()}>
+          <form className="inv__form" onSubmit={(e) => e.preventDefault()}>
             <div className="inv__field">
               <label>Applicant</label>
               <div className="inv__seg">
@@ -83,7 +81,7 @@ export default function Investments() {
           </form>
 
           {/* Results */}
-          <div className="inv__results" data-reveal>
+          <div className="inv__results">
             <div className="inv__rhead">
               <span>Issuer</span>
               <span>Rating</span>
